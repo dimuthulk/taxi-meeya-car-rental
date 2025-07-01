@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Vehicles - Taxi Meeya</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/vehicle.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Taxi Meeya</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="vehicles.html" class="active">Vehicles</a></li>
+                <li><a href="profile.html">My Profile</a></li>
+                <li><a href="bookings.html">My Bookings</a></li>
+                <li><a href="logout.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="vehicle-search-page">
+        <section class="search-filters">
+            <h2>Find Your Perfect Vehicle</h2>
+            <form id="vehicle-search-form">
+                <div class="filter-group">
+                    <label for="vehicle-type">Vehicle Type</label>
+                    <select id="vehicle-type">
+                        <option value="">All Types</option>
+                        <option value="sedan">Sedan</option>
+                        <option value="suv">SUV</option>
+                        <option value="luxury">Luxury</option>
+                        <option value="van">Van</option>
+                        <option value="convertible">Convertible</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="transmission">Transmission</label>
+                    <select id="transmission">
+                        <option value="">Any</option>
+                        <option value="automatic">Automatic</option>
+                        <option value="manual">Manual</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="fuel-type">Fuel Type</label>
+                    <select id="fuel-type">
+                        <option value="">Any</option>
+                        <option value="petrol">Petrol</option>
+                        <option value="diesel">Diesel</option>
+                        <option value="hybrid">Hybrid</option>
+                        <option value="electric">Electric</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="seats">Seating Capacity</label>
+                    <select id="seats">
+                        <option value="">Any</option>
+                        <option value="2">2</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="7">7+</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="price-range">Price Range (per day)</label>
+                    <select id="price-range">
+                        <option value="">Any</option>
+                        <option value="0-50">$0 - $50</option>
+                        <option value="50-100">$50 - $100</option>
+                        <option value="100-150">$100 - $150</option>
+                        <option value="150-200">$150 - $200</option>
+                        <option value="200">$200+</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="pickup-date">Pickup Date</label>
+                    <input type="date" id="pickup-date">
+                </div>
+                <div class="filter-group">
+                    <label for="dropoff-date">Dropoff Date</label>
+                    <input type="date" id="dropoff-date">
+                </div>
+                <button type="submit">Search Vehicles</button>
+            </form>
+        </section>
+
+        <section class="vehicle-results">
+            <div class="sort-options">
+                <span>Sort by:</span>
+                <select id="sort-by">
+                    <option value="price-asc">Price (Low to High)</option>
+                    <option value="price-desc">Price (High to Low)</option>
+                    <option value="name-asc">Name (A-Z)</option>
+                    <option value="name-desc">Name (Z-A)</option>
+                </select>
+            </div>
+            <div class="vehicle-grid" id="vehicle-results-container">
+                <!-- Filled by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Same footer as index.html -->
+    </footer>
+
+    <script src="js/search.js"></script>
+</body>
+</html>

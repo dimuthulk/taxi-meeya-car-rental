@@ -1,0 +1,11 @@
+<!-- This is a placeholder for the default car image -->
+<!-- You can replace this with an actual image file -->
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="200" fill="#f0f0f0" stroke="#ddd" stroke-width="2"/>
+  <text x="150" y="100" text-anchor="middle" fill="#999" font-family="Arial" font-size="16">
+    Vehicle Image
+  </text>
+  <text x="150" y="120" text-anchor="middle" fill="#999" font-family="Arial" font-size="12">
+    300x200
+  </text>
+</svg>

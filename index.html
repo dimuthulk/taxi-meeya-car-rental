@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxi Meeya - Car Rental Service</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo"><img src="images/logo.png" width="140px"></div>
+            <ul id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="vehicles.html">Vehicles</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="login.html" id="login-link">Login</a></li>
+                <li><a href="register.html" id="register-link">Register</a></li>
+            </ul>
+        </nav>
+        <div class="hero">
+            <h1>Rent Your Perfect Car Today</h1>
+            <div class="search-box">
+                <form id="quick-search">
+                    <div class="form-group">
+                        <label for="pickup-location">Pickup Location</label>
+                        <input type="text" id="pickup-location" placeholder="Enter city or airport">
+                    </div>
+                    <div class="form-group">
+                        <label for="pickup-date">Pickup Date</label>
+                        <input type="date" id="pickup-date">
+                    </div>
+                    <div class="form-group">
+                        <label for="dropoff-date">Dropoff Date</label>
+                        <input type="date" id="dropoff-date">
+                    </div>
+                    <button type="submit">Search Vehicles</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <section id="featured-vehicles">
+        <h2>Featured Vehicles</h2>
+        <div class="vehicle-grid" id="featured-vehicles-container">
+        </div>
+    </section>
+
+    <section id="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Choose Your Vehicle</h3>
+                <p>Select from our wide range of vehicles to suit your needs.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Make a Reservation</h3>
+                <p>Book online with our easy-to-use booking system.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Pick Up & Enjoy</h3>
+                <p>Collect your vehicle and enjoy your journey.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Taxi Meeya</h3>
+                <p>Your trusted car rental service</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Vehicles</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@taximeeya.com</p>
+                <p>Phone: +1 (123) 456-7890</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Taxi Meeya. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
