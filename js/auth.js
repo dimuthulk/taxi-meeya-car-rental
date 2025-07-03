@@ -50,7 +50,7 @@ class AuthManager {
         // Update user welcome message
         const userWelcome = document.getElementById('user-welcome');
         if (userWelcome && user.name) {
-            userWelcome.textContent = `Welcome, ${user.name}`;
+            userWelcome.innerHTML = `Welcome,<br> ${user.name}`;
             console.log('User welcome updated:', user.name);
         }
     }

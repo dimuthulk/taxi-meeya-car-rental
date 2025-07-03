@@ -6,6 +6,18 @@
     text-transform: capitalize;
     text-decoration: none;
 }
+
+body {
+        font-family: "Inter", sans-serif;
+}
+
+.user-welcome{
+    color: #ffc61a;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+}
+
 html{
     font-size: 62.5%;
     overflow-x: hidden;
