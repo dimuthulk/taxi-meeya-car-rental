@@ -1,29 +1,19 @@
 <?php
-// logout.php
 session_start();
+header('Content-Type: application/json');
 
-// Destroy all session variables
+// Destroy all session data
 $_SESSION = array();
 
-// If a session cookie exists, destroy it
-if (isset($_COOKIE[session_name()])) {
-    setcookie(session_name(), '', time() - 42000, '/');
+if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+    setcookie(session_name(), '', time() - 42000,
+        $params["path"], $params["domain"],
+        $params["secure"], $params["httponly"]
+    );
 }
 
-// Destroy the session
 session_destroy();
 
-// Check if it's an AJAX request
-$isAjax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
-          strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
-
-if ($isAjax) {
-    // Return JSON response for AJAX requests
-    header('Content-Type: application/json');
-    echo json_encode(['success' => true, 'message' => 'Logged out successfully']);
-} else {
-    // Redirect to login page for direct access
-    header('Location: ../../login.html');
-    exit;
-}
+echo json_encode(['success' => true, 'message' => 'Logged out successfully']);
 ?>

@@ -1,88 +1,105 @@
-document.addEventListener('DOMContentLoaded', function () {
-    console.log('[Login Debug] Form loaded');
-    
-    const form = document.getElementById('login-form');
-    const emailInput = document.getElementById('login-email');
-    const passwordInput = document.getElementById('login-password');
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const messageDiv = document.getElementById('login-message');
+// Authentication handler
+class AuthManager {
+    constructor() {
+        this.init();
+    }
 
-    // Check if all elements are found
-    console.log('[Login Debug] Form elements:', {
-        form: !!form,
-        emailInput: !!emailInput,
-        passwordInput: !!passwordInput,
-        submitBtn: !!submitBtn,
-        messageDiv: !!messageDiv
-    });
+    async init() {
+        // Only run authentication check on index.html
+        if (window.location.pathname.includes('index.html') || window.location.pathname.endsWith('/')) {
+            await this.checkAuthStatus();
+        }
+        this.setupLogoutHandler();
+    }
 
-    // Form submission
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        console.log('[Login Debug] Form submitted');
+    async checkAuthStatus() {
+        try {
+            console.log('Checking authentication status...');
+            const response = await fetch('php/auth/check_session.php');
+            const data = await response.json();
+            
+            console.log('Auth check response:', data);
 
-        // Show loading state
-        submitBtn.classList.add('loading');
-        submitBtn.disabled = true;
+            if (data.authenticated) {
+                // User is logged in, show main content
+                this.showMainContent(data.user);
+            } else {
+                // User is not logged in, redirect to login
+                this.redirectToLogin();
+            }
+        } catch (error) {
+            console.error('Error checking authentication:', error);
+            this.redirectToLogin();
+        }
+    }
 
-        // Collect form data
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-        console.log('[Login Debug] Form data:', data);
-
-        // Basic validation
-        if (!data.email || !data.password) {
-            showMessage('Please fill in all fields.', 'error');
-            submitBtn.classList.remove('loading');
-            submitBtn.disabled = false;
-            return;
+    showMainContent(user) {
+        // Hide loading screen
+        const loadingScreen = document.getElementById('loading-screen');
+        const mainContent = document.getElementById('main-content');
+        
+        if (loadingScreen) {
+            loadingScreen.style.display = 'none';
+            console.log('Loading screen hidden');
+        }
+        if (mainContent) {
+            mainContent.style.display = 'block';
+            console.log('Main content shown');
         }
 
-        // Send login request
-        console.log('[Login Debug] Sending request to:', 'php/auth/login.php');
-        fetch('php/auth/login.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(result => {
-                console.log('[Login Debug] Server response:', result);
-                if (result.success) {
-                    showMessage('Login successful! Redirecting...', 'success');
-                    setTimeout(() => {
-                        // Redirect to dashboard or home page
-                        window.location.href = result.redirect || 'index.html';
-                    }, 1500);
-                } else {
-                    showMessage(result.message || 'Login failed. Please try again.', 'error');
-                }
-            })
-            .catch(error => {
-                console.error('[Login Debug] Error:', error);
-                showMessage('Network error. Please check your connection.', 'error');
-            })
-            .finally(() => {
-                submitBtn.classList.remove('loading');
-                submitBtn.disabled = false;
-            });
-    });
-
-    function showMessage(message, type) {
-        messageDiv.innerHTML = message;
-        messageDiv.className = `message ${type}`;
-        messageDiv.style.display = 'block';
-
-        // Auto-hide after 5 seconds
-        setTimeout(() => {
-            messageDiv.style.display = 'none';
-        }, 5000);
+        // Update user welcome message
+        const userWelcome = document.getElementById('user-welcome');
+        if (userWelcome && user.name) {
+            userWelcome.textContent = `Welcome, ${user.name}`;
+            console.log('User welcome updated:', user.name);
+        }
     }
+
+    redirectToLogin() {
+        console.log('Redirecting to login...');
+        // Only redirect if not already on login page
+        if (!window.location.pathname.includes('login.html')) {
+            window.location.href = 'login.html';
+        }
+    }
+
+    setupLogoutHandler() {
+        const logoutLink = document.getElementById('logout-link');
+        if (logoutLink) {
+            logoutLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.logout();
+            });
+            console.log('Logout handler setup complete');
+        }
+    }
+
+    async logout() {
+        try {
+            console.log('Logging out...');
+            const response = await fetch('php/auth/logout.php', {
+                method: 'POST'
+            });
+            
+            const data = await response.json();
+            console.log('Logout response:', data);
+            
+            if (data.success) {
+                // Redirect to login page
+                window.location.href = 'login.html';
+            } else {
+                alert('Logout failed. Please try again.');
+            }
+        } catch (error) {
+            console.error('Logout error:', error);
+            // Force redirect even if logout request fails
+            window.location.href = 'login.html';
+        }
+    }
+}
+
+// Initialize authentication manager when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing AuthManager');
+    new AuthManager();
 });

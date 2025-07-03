@@ -4,16 +4,12 @@
     $username = "root";
     $password = "";
 
-    // Create connection with proper error handling
-    $conn = new mysqli($host, $username, $password, $dbname);
-    
-    // Check connection
-    if ($conn->connect_error) {
-        // Log error (in production, don't expose database details)
-        error_log("Database connection failed: " . $conn->connect_error);
+    $conn = mysqli_connect($host, $username, $password, $dbname);
+
+    if (!$conn) {
+        error_log("Database connection failed: " . mysqli_connect_error());
         die("Connection failed. Please try again later.");
+    } else {
+        // echo "Database connection successful.";
     }
-    
-    // Set charset to prevent character encoding issues
-    $conn->set_charset("utf8");
 ?>

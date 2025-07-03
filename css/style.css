@@ -57,7 +57,7 @@ nav a:hover {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: url('../images/vehicles/web_banner1.webp');
+    background-image: url('../images/vehicles/hero_bg.jpg');
     background-size: cover;
     background-position: center;
     opacity: 0.2;
