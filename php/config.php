@@ -4,11 +4,10 @@
     $username = "root";
     $password = "";
 
-    $conn = mysqli_connect($host, $username, $password, $dbname);
+    $conn = mysqli_connect($host, $username, $password, $dbname, $port);
 
     if (!$conn) {
-        error_log("Database connection failed: " . mysqli_connect_error());
-        die("Connection failed. Please try again later.");
+        die("Connection failed. Please try again later.".mysqli_connect_error());
     } else {
         // echo "Database connection successful.";
     }
