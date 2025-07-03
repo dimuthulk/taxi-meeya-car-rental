@@ -1,5 +1,6 @@
 <?php
-    $host = 'localhost:3307';
+    $host = 'localhost';
+    $port = 3307;
     $dbname = 'taxi_meeya';
     $username = "root";
     $password = "";

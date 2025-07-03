@@ -1,5 +1,6 @@
 <?php
 // registration.php
+session_start();
 include_once '../config.php';
 header('Content-Type: application/json');
 

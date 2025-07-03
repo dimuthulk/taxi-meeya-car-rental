@@ -76,7 +76,7 @@ echo json_encode([
         'name' => $user['first_name'] . ' ' . $user['last_name'],
         'email' => $user['email']
     ],
-    'redirect' => 'http://localhost/taxi-meeya-website/index.html'
+    'redirect' => 'index.html'
 ]);
 
 $conn->close();
