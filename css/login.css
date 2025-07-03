@@ -82,7 +82,7 @@ main {
 
 .form-header {
     text-align: center;
-    background: linear-gradient(135deg, #63BBF2 0%, #0F50A6 100%);
+    background: linear-gradient(135deg, #ffeb3b 0%, #ffc61a 100%);
 
 }
 .form-container {
@@ -99,14 +99,14 @@ main {
     margin: 0;
     font-size: 2rem;
     font-weight: 600;
-    color: white;
+    color: #000000;
     text-align: center;
     padding: 1rem;
     margin-bottom: 0;
 }
 
 .form-container p {
-    color: white;
+    color: #000000;
     text-align: center;
     padding: 0 2rem 2rem;
     margin: 0;
@@ -143,9 +143,9 @@ main {
 
 .form-group input:focus {
     outline: none;
-    border-color: #0F50A6;
+    border-color: #ffeb3b;
     background: white;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    box-shadow: 0 0 0 3px rgba(255, 235, 59, 0.1);
     transform: translateY(-1px);
 }
 
@@ -172,13 +172,13 @@ main {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #63BBF2 0%, #0F50A6 100%);
-    color: white;
+    background: linear-gradient(135deg, #ffeb3b 0%, #ffc61a 100%);
+    color: #000;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 8px 25px rgba(255, 235, 59, 0.3);
 }
 
 .btn-primary:active {
@@ -220,7 +220,7 @@ main {
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: #667eea;
+    color: #ffeb3b;
     font-size: 1.2rem;
     z-index: 1;
 }
@@ -234,14 +234,14 @@ main {
 }
 
 .form-container .text-center.mt-3 a {
-    color: #667eea;
+    color: #000000;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
 }
 
 .form-container .text-center.mt-3 a:hover {
-    color: #764ba2;
+    color: #333333;
     text-decoration: underline;
 }
 
