@@ -1303,7 +1303,7 @@ html{
 
 /* Ride Header */
 .ride-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #000000 0%, #1b2b02 100%);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -1318,7 +1318,7 @@ html{
 
 /* Hero Section */
 .ride-hero {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9)), url('../images/vehicles/hero_bg.jpg');
+    background: linear-gradient(135deg, rgba(46, 46, 45, 0.9), rgba(35, 51, 51, 0.9)), url('../images/vehicles/hero_bg.jpg');
     background-size: cover;
     background-position: center;
     padding: 8rem 2rem 6rem;
@@ -1519,7 +1519,7 @@ html{
 
 /* Price Estimate */
 .price-estimate {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #000000, #030d46);
     padding: 2rem;
     border-radius: 15px;
     margin-bottom: 2.5rem;
@@ -1711,7 +1711,7 @@ html{
 .select-vehicle-btn {
     width: 100%;
     padding: 1.5rem;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #000000, #030d46);
     color: white;
     border: none;
     border-radius: 10px;
@@ -1722,7 +1722,7 @@ html{
 }
 
 .select-vehicle-btn:hover {
-    background: linear-gradient(135deg, #5a6fd8, #6a42a0);
+    background: linear-gradient(135deg, #000000, #030d46);
     transform: translateY(-2px);
 }
 
@@ -1764,7 +1764,7 @@ html{
 .benefit-icon {
     width: 80px;
     height: 80px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+ background: linear-gradient(135deg, #000000, #030d46);
     border-radius: 50%;
     display: flex;
     align-items: center;

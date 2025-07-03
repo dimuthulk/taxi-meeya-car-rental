@@ -82,20 +82,23 @@ CREATE TABLE IF NOT EXISTS customers (
     INDEX idx_customer_phone (phone_number)
 );
 
--- Create booking_tracking table for real-time tracking
+-- Create booking_tracking table for real-time tracking and status changes
 CREATE TABLE IF NOT EXISTS booking_tracking (
     id INT AUTO_INCREMENT PRIMARY KEY,
     booking_id INT NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    notes TEXT,
     driver_latitude DECIMAL(10, 8),
     driver_longitude DECIMAL(11, 8),
-    status_update VARCHAR(100),
     estimated_arrival TIME,
     distance_remaining DECIMAL(5, 2),
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     
     FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE CASCADE,
     INDEX idx_booking_tracking (booking_id),
-    INDEX idx_tracking_time (updated_at)
+    INDEX idx_tracking_time (created_at),
+    INDEX idx_status (status)
 );
 
 -- Create vehicle_pricing table

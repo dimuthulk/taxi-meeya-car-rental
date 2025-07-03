@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,62 +13,62 @@
             margin: 2rem auto;
             padding: 0 2rem;
         }
-        
+
         .admin-header {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #000000, #030d46);
             color: white;
             padding: 2rem;
             border-radius: 15px;
             margin-bottom: 3rem;
             text-align: center;
         }
-        
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
         }
-        
+
         .stat-card {
             background: white;
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-        
+
         .stat-number {
             font-size: 3rem;
             font-weight: 700;
             color: #667eea;
             display: block;
         }
-        
+
         .stat-label {
             font-size: 1.4rem;
             color: #666;
             margin-top: 0.5rem;
         }
-        
+
         .bookings-table {
             background: white;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
-        
+
         .table-header {
             background: #f8f9fa;
             padding: 2rem;
             border-bottom: 1px solid #ddd;
         }
-        
+
         .bookings-list {
             max-height: 600px;
             overflow-y: auto;
         }
-        
+
         .booking-item {
             display: grid;
             grid-template-columns: 1fr 2fr 1fr 1fr 1fr 100px;
@@ -76,11 +77,11 @@
             border-bottom: 1px solid #f0f0f0;
             align-items: center;
         }
-        
+
         .booking-item:hover {
             background: #f8f9fa;
         }
-        
+
         .status-badge {
             padding: 0.5rem 1rem;
             border-radius: 20px;
@@ -88,12 +89,27 @@
             font-weight: 600;
             text-align: center;
         }
-        
-        .status-pending { background: #fff3cd; color: #856404; }
-        .status-confirmed { background: #d4edda; color: #155724; }
-        .status-completed { background: #d1ecf1; color: #0c5460; }
-        .status-cancelled { background: #f8d7da; color: #721c24; }
-        
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-completed {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
         .action-btn {
             padding: 0.5rem 1rem;
             border: none;
@@ -102,35 +118,59 @@
             font-size: 1.2rem;
             transition: all 0.3s ease;
         }
-        
-        .btn-primary { background: #667eea; color: white; }
-        .btn-success { background: #4CAF50; color: white; }
-        .btn-danger { background: #f44336; color: white; }
-        
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-success {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #f44336;
+            color: white;
+        }
+
         .action-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
-        
+
         @media (max-width: 768px) {
             .booking-item {
                 grid-template-columns: 1fr;
                 gap: 0.5rem;
             }
-            
-            .booking-item > div {
+
+            .booking-item>div {
                 padding: 0.5rem 0;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="admin-container">
         <div class="admin-header">
             <h1><i class="fas fa-tachometer-alt"></i> Taxi Meeya Admin Dashboard</h1>
             <p>Manage bookings and monitor system performance</p>
+
+            <!-- Backend Status Indicator -->
+            <div class="backend-status" id="backend-status" style="
+                margin-top: 1rem;
+                padding: 0.8rem 1.5rem;
+                border-radius: 8px;
+                font-size: 1.2rem;
+                display: inline-block;
+            ">
+                <i class="fas fa-circle" id="status-icon"></i>
+                <span id="status-text">Checking system status...</span>
+            </div>
         </div>
-        
+
         <div class="stats-grid">
             <div class="stat-card">
                 <span class="stat-number" id="total-bookings">0</span>
@@ -149,7 +189,7 @@
                 <span class="stat-label">Today's Revenue</span>
             </div>
         </div>
-        
+
         <div class="bookings-table">
             <div class="table-header">
                 <h2><i class="fas fa-list"></i> Recent Bookings</h2>
@@ -157,7 +197,7 @@
                     <i class="fas fa-sync-alt"></i> Refresh
                 </button>
             </div>
-            
+
             <div class="bookings-list" id="bookings-list">
                 <!-- Bookings will be loaded here -->
                 <div style="text-align: center; padding: 3rem; color: #666;">
@@ -167,35 +207,125 @@
             </div>
         </div>
     </div>
-    
+
     <script>
         // Admin dashboard functionality
         let allBookings = [];
-        
+        let dashboardStats = null;
+        let isBackendAvailable = false;
+
+        // Test backend connectivity
+        async function testBackendConnection() {
+            const statusDiv = document.getElementById('backend-status');
+            const statusIcon = document.getElementById('status-icon');
+            const statusText = document.getElementById('status-text');
+
+            try {
+                statusDiv.style.background = 'rgba(255, 255, 255, 0.2)';
+                statusDiv.style.color = '#fff';
+                statusIcon.style.color = '#ffc107';
+                statusText.textContent = 'Testing backend connection...';
+
+                const response = await fetch('php/test.php');
+                const data = await response.json();
+
+                if (data.success) {
+                    isBackendAvailable = true;
+                    statusDiv.style.background = 'rgba(76, 175, 80, 0.2)';
+                    statusDiv.style.color = '#4CAF50';
+                    statusIcon.style.color = '#4CAF50';
+                    statusText.textContent = '✅ Backend Connected - Real Data';
+                    console.log('✅ Admin backend is working properly');
+                } else {
+                    throw new Error(data.message || 'Backend test failed');
+                }
+            } catch (error) {
+                isBackendAvailable = false;
+                statusDiv.style.background = 'rgba(244, 67, 54, 0.2)';
+                statusDiv.style.color = '#f44336';
+                statusIcon.style.color = '#f44336';
+                statusText.textContent = '⚠️ Backend Offline - Demo Data';
+                console.log('❌ Admin backend connection failed:', error);
+            }
+
+            return isBackendAvailable;
+        }
+
         // Load dashboard data
         async function loadDashboard() {
             try {
-                // In a real application, this would fetch from your API
-                // For demo purposes, we'll simulate some data
-                await loadMockData();
+                // Test backend first
+                await testBackendConnection();
+
+                if (isBackendAvailable) {
+                    await loadRealData();
+                } else {
+                    await loadMockData();
+                }
+
                 updateStats();
                 displayBookings();
             } catch (error) {
                 console.error('Error loading dashboard:', error);
                 showError('Failed to load dashboard data');
+                await loadMockData(); // Fallback to mock data
+                updateStats();
+                displayBookings();
             }
         }
-        
-        // Simulate loading data (replace with actual API calls)
+
+        // Load real data from backend
+        async function loadRealData() {
+            try {
+                console.log('📡 Loading real data from backend...');
+
+                // Fetch bookings from admin API
+                const bookingsResponse = await fetch('php/admin.php?action=bookings&limit=50');
+                const bookingsData = await bookingsResponse.json();
+
+                if (!bookingsData.success) {
+                    throw new Error(bookingsData.message || 'Failed to load bookings');
+                }
+
+                // Fetch statistics from admin API
+                const statsResponse = await fetch('php/admin.php?action=statistics');
+                const statsData = await statsResponse.json();
+
+                if (!statsData.success) {
+                    throw new Error(statsData.message || 'Failed to load statistics');
+                }
+
+                // Update global data
+                allBookings = bookingsData.data || [];
+                dashboardStats = statsData.data || {
+                    total_bookings: 0,
+                    today_bookings: 0,
+                    monthly_revenue: 0,
+                    active_drivers: 0,
+                    status_breakdown: {}
+                };
+
+                console.log('✅ Real data loaded successfully:', {
+                    bookings: allBookings.length,
+                    stats: dashboardStats
+                });
+
+            } catch (error) {
+                console.error('❌ Failed to load real data:', error);
+                throw error; // Re-throw to trigger fallback
+            }
+        }
+
+        // Simulate loading data (fallback for when backend is unavailable)
         async function loadMockData() {
             // Simulate API delay
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
+            await new Promise(resolve => setTimeout(resolve, 800));
+
             allBookings = [
                 {
                     id: 1,
-                    booking_reference: 'TAXI20250701001',
-                    passenger_name: 'John Doe',
+                    booking_reference: 'DEMO20250704001',
+                    passenger_name: 'John Doe (Demo)',
                     phone_number: '+94771234567',
                     pickup_location: 'Colombo Fort',
                     destination: 'Airport',
@@ -206,8 +336,8 @@
                 },
                 {
                     id: 2,
-                    booking_reference: 'TAXI20250701002',
-                    passenger_name: 'Jane Smith',
+                    booking_reference: 'DEMO20250704002',
+                    passenger_name: 'Jane Smith (Demo)',
                     phone_number: '+94779876543',
                     pickup_location: 'Kandy City',
                     destination: 'Temple of Tooth',
@@ -218,8 +348,8 @@
                 },
                 {
                     id: 3,
-                    booking_reference: 'TAXI20250701003',
-                    passenger_name: 'Mike Johnson',
+                    booking_reference: 'DEMO20250704003',
+                    passenger_name: 'Mike Johnson (Demo)',
                     phone_number: '+94775555555',
                     pickup_location: 'Galle Face',
                     destination: 'Mount Lavinia',
@@ -229,34 +359,45 @@
                     created_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString()
                 }
             ];
+
+            console.log('📋 Loaded demo/mock data');
         }
-        
+
         // Update statistics
         function updateStats() {
-            const totalBookings = allBookings.length;
-            const pendingBookings = allBookings.filter(b => b.booking_status === 'pending').length;
-            const todayCompleted = allBookings.filter(b => 
-                b.booking_status === 'completed' && 
-                new Date(b.created_at).toDateString() === new Date().toDateString()
-            ).length;
-            
-            const todayRevenue = allBookings
-                .filter(b => 
-                    b.booking_status === 'completed' && 
+            if (isBackendAvailable && dashboardStats) {
+                // Use real statistics from backend
+                document.getElementById('total-bookings').textContent = dashboardStats.total_bookings || 0;
+                document.getElementById('pending-bookings').textContent = dashboardStats.status_breakdown?.pending || 0;
+                document.getElementById('completed-bookings').textContent = dashboardStats.today_bookings || 0;
+                document.getElementById('total-revenue').textContent = `Rs. ${parseFloat(dashboardStats.monthly_revenue || 0).toLocaleString()}`;
+            } else {
+                // Calculate from local booking data (demo mode)
+                const totalBookings = allBookings.length;
+                const pendingBookings = allBookings.filter(b => b.booking_status === 'pending').length;
+                const todayCompleted = allBookings.filter(b =>
+                    b.booking_status === 'completed' &&
                     new Date(b.created_at).toDateString() === new Date().toDateString()
-                )
-                .reduce((sum, b) => sum + parseFloat(b.estimated_fare), 0);
-            
-            document.getElementById('total-bookings').textContent = totalBookings;
-            document.getElementById('pending-bookings').textContent = pendingBookings;
-            document.getElementById('completed-bookings').textContent = todayCompleted;
-            document.getElementById('total-revenue').textContent = `Rs. ${todayRevenue.toLocaleString()}`;
+                ).length;
+
+                const todayRevenue = allBookings
+                    .filter(b =>
+                        b.booking_status === 'completed' &&
+                        new Date(b.created_at).toDateString() === new Date().toDateString()
+                    )
+                    .reduce((sum, b) => sum + parseFloat(b.estimated_fare), 0);
+
+                document.getElementById('total-bookings').textContent = totalBookings;
+                document.getElementById('pending-bookings').textContent = pendingBookings;
+                document.getElementById('completed-bookings').textContent = todayCompleted;
+                document.getElementById('total-revenue').textContent = `Rs. ${todayRevenue.toLocaleString()}`;
+            }
         }
-        
+
         // Display bookings
         function displayBookings() {
             const bookingsList = document.getElementById('bookings-list');
-            
+
             if (allBookings.length === 0) {
                 bookingsList.innerHTML = `
                     <div style="text-align: center; padding: 3rem; color: #666;">
@@ -266,7 +407,7 @@
                 `;
                 return;
             }
-            
+
             bookingsList.innerHTML = allBookings.map(booking => `
                 <div class="booking-item">
                     <div>
@@ -291,7 +432,7 @@
                 </div>
             `).join('');
         }
-        
+
         // Get action buttons based on booking status
         function getActionButtons(booking) {
             switch (booking.booking_status) {
@@ -314,51 +455,140 @@
                     return `<span style="color: #999;">-</span>`;
             }
         }
-        
+
         // Update booking status
         async function updateStatus(bookingId, newStatus) {
             try {
-                // Find and update the booking
+                // Find the booking
                 const bookingIndex = allBookings.findIndex(b => b.id === bookingId);
-                if (bookingIndex !== -1) {
-                    allBookings[bookingIndex].booking_status = newStatus;
-                    
-                    // In real application, send update to server
-                    // await fetch(`php/booking.php`, { method: 'PUT', ... });
-                    
-                    updateStats();
-                    displayBookings();
-                    
-                    showSuccess(`Booking ${allBookings[bookingIndex].booking_reference} updated to ${newStatus}`);
+                if (bookingIndex === -1) {
+                    throw new Error('Booking not found');
                 }
+
+                const booking = allBookings[bookingIndex];
+                const oldStatus = booking.booking_status;
+
+                // Show loading state
+                const actionButtons = document.querySelector(`[onclick="updateStatus(${bookingId}, '${newStatus}')"]`);
+                if (actionButtons) {
+                    actionButtons.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                    actionButtons.disabled = true;
+                }
+
+                if (isBackendAvailable) {
+                    // Send update to server using admin API
+                    const response = await fetch(`php/admin.php`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            action: 'updateStatus',
+                            bookingId: bookingId,
+                            status: newStatus
+                        })
+                    });
+
+                    const result = await response.json();
+
+                    if (!result.success) {
+                        throw new Error(result.message || 'Failed to update booking status');
+                    }
+
+                    console.log(`📡 Backend: Updated booking ${booking.booking_reference} from ${oldStatus} to ${newStatus}`);
+                } else {
+                    // Simulate demo mode delay
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                    console.log(`🎭 Demo: Updated booking ${booking.booking_reference} from ${oldStatus} to ${newStatus}`);
+                }
+
+                // Update local data
+                allBookings[bookingIndex].booking_status = newStatus;
+
+                // Update timestamp
+                allBookings[bookingIndex].updated_at = new Date().toISOString();
+
+                // Refresh display
+                updateStats();
+                displayBookings();
+
+                showSuccess(`Booking ${booking.booking_reference} updated from ${oldStatus.toUpperCase()} to ${newStatus.toUpperCase()}`);
+
             } catch (error) {
                 console.error('Error updating booking:', error);
-                showError('Failed to update booking status');
+                showError(`Failed to update booking status: ${error.message}`);
+
+                // Refresh to restore original state
+                displayBookings();
             }
         }
-        
+
         // Refresh bookings
         async function refreshBookings() {
-            document.getElementById('bookings-list').innerHTML = `
+            const bookingsList = document.getElementById('bookings-list');
+
+            bookingsList.innerHTML = `
                 <div style="text-align: center; padding: 3rem; color: #666;">
                     <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-                    <p>Refreshing...</p>
+                    <p>Refreshing data...</p>
                 </div>
             `;
-            
-            await loadDashboard();
+
+            try {
+                await loadDashboard();
+                showSuccess('Dashboard refreshed successfully');
+            } catch (error) {
+                console.error('Error refreshing dashboard:', error);
+                showError('Failed to refresh dashboard');
+            }
         }
-        
+
+        // Add real-time booking simulation
+        function simulateNewBooking() {
+            if (!isBackendAvailable) {
+                const newBooking = {
+                    id: Date.now(),
+                    booking_reference: 'LIVE' + Date.now().toString().slice(-8),
+                    passenger_name: 'Live Customer',
+                    phone_number: '+94778888888',
+                    pickup_location: 'Live Location',
+                    destination: 'Live Destination',
+                    vehicle_type: ['motorbike', 'tuktuk', 'car'][Math.floor(Math.random() * 3)],
+                    estimated_fare: (Math.random() * 2000 + 200).toFixed(2),
+                    booking_status: 'pending',
+                    created_at: new Date().toISOString()
+                };
+
+                allBookings.unshift(newBooking);
+                updateStats();
+                displayBookings();
+
+                showSuccess(`New booking received: ${newBooking.booking_reference}`);
+            }
+        }
+
+        // Enhanced error handling
+        window.addEventListener('error', function (e) {
+            console.error('JavaScript Error:', e.error);
+            showError('A JavaScript error occurred. Check console for details.');
+        });
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function (e) {
+            if (e.ctrlKey && e.key === 'r') {
+                e.preventDefault();
+                refreshBookings();
+            }
+        });
+
         // Show success message
         function showSuccess(message) {
             showNotification(message, 'success');
         }
-        
+
         // Show error message
         function showError(message) {
             showNotification(message, 'error');
         }
-        
+
         // Simple notification system
         function showNotification(message, type) {
             const notification = document.createElement('div');
@@ -376,7 +606,7 @@
                 transition: transform 0.3s ease;
                 background: ${type === 'success' ? '#4CAF50' : '#f44336'};
             `;
-            
+
             notification.innerHTML = `
                 <div style="display: flex; align-items: center; justify-content: space-between;">
                     <span>${message}</span>
@@ -384,21 +614,22 @@
                             style="background: none; border: none; color: white; font-size: 18px; cursor: pointer; margin-left: 15px;">×</button>
                 </div>
             `;
-            
+
             document.body.appendChild(notification);
-            
+
             setTimeout(() => notification.style.transform = 'translateX(0)', 100);
             setTimeout(() => {
                 notification.style.transform = 'translateX(400px)';
                 setTimeout(() => notification.remove(), 300);
             }, 3000);
         }
-        
+
         // Initialize dashboard
         document.addEventListener('DOMContentLoaded', loadDashboard);
-        
+
         // Auto-refresh every 30 seconds
         setInterval(refreshBookings, 30000);
     </script>
 </body>
+
 </html>
