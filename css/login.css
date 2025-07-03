@@ -192,6 +192,7 @@ main {
     border-radius: 8px;
     font-size: 0.9rem;
     font-weight: 500;
+    display: none; /* Initially hidden */
 }
 
 .message.error {
@@ -233,14 +234,16 @@ main {
     border-top: 1px solid #e1e5e9;
 }
 
-.form-container .text-center.mt-3 a {
+.form-container .text-center.mt-3 a,
+.register-link {
     color: #000000;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
 }
 
-.form-container .text-center.mt-3 a:hover {
+.form-container .text-center.mt-3 a:hover,
+.register-link:hover {
     color: #333333;
     text-decoration: underline;
 }
@@ -276,8 +279,67 @@ main {
     }
 }
 
+/* Navbar Styles */
+.navbar {
+    background: #ffeb3b;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-/* Responsive Design */
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000000;
+    text-decoration: none;
+}
+
+.navbar .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.navbar .nav-links a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.navbar .nav-links a:hover {
+    background: #ffc61a;
+    color: #000000;
+    transform: translateY(-2px);
+}
+
+.navbar .nav-links a.active {
+    background: #ffc61a;
+    color: #000000;
+}
+
+/* Adjust main content to account for fixed navbar */
+main {
+    margin-top: 80px; /* Add space for fixed navbar */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-image: url('../images/main_bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; */
+}
+
 @media (max-width: 600px) {
     .form-container {
         margin: 1rem;
