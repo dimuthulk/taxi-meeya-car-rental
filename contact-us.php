@@ -13,19 +13,53 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="css/Contactstyles.css" />
+  <link rel="stylesheet" href="css/style1.css" />
 </head>
 <body>
   <!-- HEADER SECTION -->
-  <header class="header">
-    <a href="#" id="logo"><img src="images/logo.png" alt="Taxi Meeya Logo" /></a>
-    <nav class="navbar">
-      <a href="index.html">Home</a>
-      <a href="#">Gallery</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
-    </nav>
-    <a href="#" id="menu-bars" class="fas fa-bars"></a>
-  </header>
+        <header class="header">
+            <a href="#" id="logo"><img src="./images/Taxi_Meeya.png" alt=""></a>
+            <nav class="navbar">
+                <a href="./index.html">Home</a>
+                <a href="#">Ride</a>
+                <a href="#">Our Rides</a>
+                <a href="contact-us.php">Contact Us</a>
+                <a href="#">About Us</a>
+            </nav>
+            
+            <!-- User Profile Section -->
+            <div class="user-profile" id="user-profile">
+                <div class="profile-info">
+                    <span class="user-name" id="user-name">John Doe</span>
+                    <span class="user-role">Customer</span>
+                </div>
+                <div class="profile-avatar" id="profile-avatar">
+                    <img src="./images/jhon.png" alt="User Avatar" class="avatar-img">
+                    <div class="online-status"></div>
+                </div>
+                <div class="profile-dropdown" id="profile-dropdown">
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-user"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-history"></i>
+                        <span>Booking History</span>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                    <hr class="dropdown-divider">
+                    <a href="login.html" class="dropdown-item logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
+            
+            <a href="#" id="menu-bars" class="fas fa-bars" title="Open Menu" aria-label="Open Menu"></a>
+        </header>
 
   <!-- FEEDBACK SECTION -->
   <section class="contact-section">
