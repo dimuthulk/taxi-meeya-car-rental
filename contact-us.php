@@ -12,15 +12,16 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
     rel="stylesheet"
   />
+    <link rel="stylesheet" href="css/style1.css" />
   <link rel="stylesheet" href="css/Contactstyles.css" />
-  <link rel="stylesheet" href="css/style1.css" />
+
 </head>
 <body>
   <!-- HEADER SECTION -->
-        <header class="header">
+          <header class="header">
             <a href="#" id="logo"><img src="./images/Taxi_Meeya.png" alt=""></a>
             <nav class="navbar">
-                <a href="./index.html">Home</a>
+                <a href="index.html">Home</a>
                 <a href="#">Ride</a>
                 <a href="#">Our Rides</a>
                 <a href="contact-us.php">Contact Us</a>
@@ -30,15 +31,14 @@
             <!-- User Profile Section -->
             <div class="user-profile" id="user-profile">
                 <div class="profile-info">
-                    <span class="user-name" id="user-name">John Doe</span>
-                    <span class="user-role">Customer</span>
+                   <span id="user-welcome" class="user-welcome">
                 </div>
                 <div class="profile-avatar" id="profile-avatar">
                     <img src="./images/jhon.png" alt="User Avatar" class="avatar-img">
                     <div class="online-status"></div>
                 </div>
                 <div class="profile-dropdown" id="profile-dropdown">
-                    <a href="#" class="dropdown-item">
+                    <!-- <a href="#" class="dropdown-item">
                         <i class="fas fa-user"></i>
                         <span>My Profile</span>
                     </a>
@@ -49,7 +49,7 @@
                     <a href="#" class="dropdown-item">
                         <i class="fas fa-cog"></i>
                         <span>Settings</span>
-                    </a>
+                    </a> -->
                     <hr class="dropdown-divider">
                     <a href="login.html" class="dropdown-item logout">
                         <i class="fas fa-sign-out-alt"></i>
@@ -122,6 +122,8 @@
     </div>
   </section>
 
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
   <script>
     function validateForm() {
       var form = document.forms["feedbackForm"];
