@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (result.success) {
                     showMessage('Account created successfully! Redirecting to login...', 'success');
                     setTimeout(() => {
-                        window.location.href = 'login.html';
+                        window.location.href = '/login.html';
                     }, 2000);
                 } else {
                     showMessage(result.message || 'Registration failed. Please try again.', 'error');

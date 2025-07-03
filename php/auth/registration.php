@@ -3,9 +3,22 @@
 include_once '../config.php';
 header('Content-Type: application/json');
 
+// Enable error reporting for debugging (remove in production)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Check DB connection
+if (!isset($conn) || !$conn) {
+    echo json_encode(['success' => false, 'message' => 'Database connection failed.']);
+    exit;
+}
 
 // Get POST data
 $input = file_get_contents('php://input');
+if (!$input) {
+    echo json_encode(['success' => false, 'message' => 'No input received.']);
+    exit;
+}
 $data = json_decode($input, true);
 
 // Check if JSON decode was successful
@@ -39,7 +52,7 @@ if (strlen($password) < 6) {
 // Check if email already exists
 $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
 if (!$stmt) {
-    echo json_encode(['success' => false, 'message' => 'Database error occurred.']);
+    echo json_encode(['success' => false, 'message' => 'Database error occurred (SELECT): ' . $conn->error]);
     exit;
 }
 $stmt->bind_param('s', $email);
@@ -58,7 +71,7 @@ $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 // Insert user
 $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, phone, password) VALUES (?, ?, ?, ?, ?)");
 if (!$stmt) {
-    echo json_encode(['success' => false, 'message' => 'Database error occurred.']);
+    echo json_encode(['success' => false, 'message' => 'Database error occurred (INSERT): ' . $conn->error]);
     exit;
 }
 $stmt->bind_param('sssss', $first_name, $last_name, $email, $phone, $hashed_password);
@@ -66,7 +79,7 @@ $stmt->bind_param('sssss', $first_name, $last_name, $email, $phone, $hashed_pass
 if ($stmt->execute()) {
     echo json_encode(['success' => true, 'message' => 'Account created successfully!']);
 } else {
-    echo json_encode(['success' => false, 'message' => 'Registration failed. Please try again.']);
+    echo json_encode(['success' => false, 'message' => 'Registration failed: ' . $stmt->error]);
 }
 
 $stmt->close();

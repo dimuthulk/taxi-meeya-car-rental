@@ -1,5 +1,5 @@
 <?php
-    $host = 'localhost:3307';
+    $host = '127.0.0.1:3307';
     $dbname = 'taxi_meeya';
     $username = "root";
     $password = "";
@@ -9,7 +9,11 @@
     if (!$conn) {
         error_log("Database connection failed: " . mysqli_connect_error());
         die("Connection failed. Please try again later.");
-    } else {
-        // echo "Database connection successful.";
+
+    }
+
+    else {
+        // Uncomment the line below for debugging purposes
+        echo "Database connection successful.";
     }
 ?>
