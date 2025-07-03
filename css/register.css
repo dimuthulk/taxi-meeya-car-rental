@@ -95,7 +95,7 @@ ol {
 
 .register-header {
     background: linear-gradient(135deg, #ffeb3b 0%, #ffc61a 100%);
-    color: #000;
+    color: hsl(0, 0%, 0%);
     text-align: center;
     padding: 2rem;
 }

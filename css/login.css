@@ -220,7 +220,7 @@ main {
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: #ffeb3b;
+    color: hsl(54, 100%, 62%);
     font-size: 1.2rem;
     z-index: 1;
 }
