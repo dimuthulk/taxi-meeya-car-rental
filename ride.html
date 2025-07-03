@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Ride - Taxi Meeya</title>
+    <link rel="stylesheet" href="css/style1.css">
+    <link rel="stylesheet" href="fontawesome-free-5.15.3-web/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+         <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header ride-header">
+        <a href="index.html" id="logo"><img src="./images/Taxi_Meeya.png" alt="Taxi Meeya"></a>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="ride.html" class="active">Ride</a>
+            <a href="#our-rides">Our Rides</a>
+            <a href="contact-us.php">Contact Us</a>
+            <a href="#about">About Us</a>
+        </nav>
+        
+        <!-- User Profile Section -->
+        <div class="user-profile" id="user-profile">
+            <div class="profile-info">
+                <span class="user-name" id="user-name">John Doe</span>
+                <span class="user-role">Customer</span>
+            </div>
+            <div class="profile-avatar" id="profile-avatar">
+                <img src="./images/jhon.png" alt="User Avatar" class="avatar-img">
+                <div class="online-status"></div>
+            </div>
+            <div class="profile-dropdown" id="profile-dropdown">
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-user"></i>
+                    <span>My Profile</span>
+                </a>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-history"></i>
+                    <span>Booking History</span>
+                </a>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <hr class="dropdown-divider">
+                <a href="login.html" class="dropdown-item logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+        
+        <a href="#" id="menu-bars" class="fas fa-bars" title="Open Menu" aria-label="Open Menu"></a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="ride-hero">
+        <div class="hero-content">
+            <h1>Book Your Perfect Ride</h1>
+            <p>Quick, reliable, and comfortable transportation at your fingertips</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Happy Customers</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Service Available</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">5★</span>
+                    <span class="stat-label">Average Rating</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ride Booking Form -->
+    <section class="booking-section">
+        <div class="container">
+            <div class="booking-content">
+                <div class="booking-info">
+                    <h2>Quick & Easy Booking</h2>
+                    <p>Book your ride in just a few clicks. Choose from our fleet of modern vehicles and experienced drivers.</p>
+                    
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Instant Booking</h4>
+                                <p>Get confirmed rides in seconds</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>GPS Tracking</h4>
+                                <p>Track your ride in real-time</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <h4>Safe & Secure</h4>
+                                <p>Verified drivers and secure payments</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booking-form-container">
+                    <form class="ride-booking-form" id="rideBookingForm">
+                        <div class="backend-status" id="backend-status" style="
+                            display: none;
+                            padding: 1rem;
+                            margin-bottom: 2rem;
+                            border-radius: 10px;
+                            font-size: 1.3rem;
+                            text-align: center;
+                        ">
+                            <i class="fas fa-circle" id="status-icon"></i>
+                            <span id="status-text">Checking backend...</span>
+                        </div>
+
+                        <h3>Book Your Ride Now</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pickup-location">
+                                    <i class="fas fa-map-marker-alt pickup-icon"></i>
+                                    Pickup Location
+                                </label>
+                                <input type="text" id="pickup-location" placeholder="Enter pickup location" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="destination">
+                                    <i class="fas fa-map-marker-alt destination-icon"></i>
+                                    Destination
+                                </label>
+                                <input type="text" id="destination" placeholder="Where are you going?" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="ride-date">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    Date
+                                </label>
+                                <input type="date" id="ride-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ride-time">
+                                    <i class="fas fa-clock"></i>
+                                    Time
+                                </label>
+                                <input type="time" id="ride-time" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="passenger-name">
+                                    <i class="fas fa-user"></i>
+                                    Passenger Name
+                                </label>
+                                <input type="text" id="passenger-name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone-number">
+                                    <i class="fas fa-phone"></i>
+                                    Phone Number
+                                </label>
+                                <input type="tel" id="phone-number" placeholder="+94 77 123 4567" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="vehicle-type">
+                                    <i class="fas fa-car"></i>
+                                    Vehicle Type
+                                </label>
+                                <select id="vehicle-type" required>
+                                    <option value="">Select vehicle type</option>
+                                    <option value="motorbike">Motorbike - Quick & Economical</option>
+                                    <option value="tuktuk">Tuk Tuk - Perfect for City Rides</option>
+                                    <option value="car">Car - Comfortable & Spacious</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="special-requests">
+                                    <i class="fas fa-comment"></i>
+                                    Special Requests (Optional)
+                                </label>
+                                <textarea id="special-requests" placeholder="Any special requirements or notes..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="price-estimate">
+                            <div class="estimate-info">
+                                <span class="estimate-label">Estimated Fare:</span>
+                                <span class="estimate-price" id="estimated-price">Rs. 0</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="book-now-btn">
+                            <i class="fas fa-taxi"></i>
+                            Book My Ride Now
+                        </button>
+
+                        <div class="booking-note">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Your ride will be confirmed within 2 minutes</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vehicle Types Section -->
+    <section class="vehicle-types" id="our-rides">
+        <div class="container">
+            <h2>Choose Your Ride</h2>
+            <p>Select from our fleet of modern and well-maintained vehicles</p>
+            
+            <div class="vehicles-grid">
+                <div class="vehicle-card" data-vehicle="motorbike">
+                    <div class="vehicle-image">
+                        <img src="./images/image1.png" alt="Motorbike">
+                        <div class="vehicle-badge">Most Popular</div>
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>Motorbike</h3>
+                        <p>Quick and economical for solo rides</p>
+                        <div class="vehicle-features">
+                            <span><i class="fas fa-user"></i> 1 Passenger</span>
+                            <span><i class="fas fa-clock"></i> 5-10 mins</span>
+                        </div>
+                        <div class="vehicle-price">
+                            <span class="price">From Rs. 150</span>
+                            <span class="per-km">/ trip</span>
+                        </div>
+                        <button class="select-vehicle-btn" data-vehicle="motorbike">Select Motorbike</button>
+                    </div>
+                </div>
+
+                <div class="vehicle-card" data-vehicle="tuktuk">
+                    <div class="vehicle-image">
+                        <img src="./images/image2.png" alt="Tuk Tuk">
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>Tuk Tuk</h3>
+                        <p>Perfect for short city trips</p>
+                        <div class="vehicle-features">
+                            <span><i class="fas fa-users"></i> 2-3 Passengers</span>
+                            <span><i class="fas fa-clock"></i> 10-15 mins</span>
+                        </div>
+                        <div class="vehicle-price">
+                            <span class="price">From Rs. 200</span>
+                            <span class="per-km">/ trip</span>
+                        </div>
+                        <button class="select-vehicle-btn" data-vehicle="tuktuk">Select Tuk Tuk</button>
+                    </div>
+                </div>
+
+                <div class="vehicle-card" data-vehicle="car">
+                    <div class="vehicle-image">
+                        <img src="./images/image3.png" alt="Car">
+                        <div class="vehicle-badge premium">Premium</div>
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>Car</h3>
+                        <p>Comfortable and spacious rides</p>
+                        <div class="vehicle-features">
+                            <span><i class="fas fa-users"></i> 1-4 Passengers</span>
+                            <span><i class="fas fa-clock"></i> 15-20 mins</span>
+                        </div>
+                        <div class="vehicle-price">
+                            <span class="price">From Rs. 350</span>
+                            <span class="per-km">/ trip</span>
+                        </div>
+                        <button class="select-vehicle-btn" data-vehicle="car">Select Car</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us">
+        <div class="container">
+            <h2>Why Choose Taxi Meeya?</h2>
+            <div class="benefits-grid">
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <i class="fas fa-lightning-bolt"></i>
+                    </div>
+                    <h3>Fast Booking</h3>
+                    <p>Book your ride in under 30 seconds with our streamlined process</p>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Affordable Rates</h3>
+                    <p>Competitive pricing with no hidden charges or surge pricing</p>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Verified Drivers</h3>
+                    <p>All our drivers are background-checked and professionally trained</p>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Round-the-clock customer support for any assistance you need</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section about">
+                <h2>Taxi MEEYA</h2>
+                <p>Trusted, safe and affordable taxi service wherever you go. Travel in comfort with Taxi MEEYA! We provide 24/7 service with professional drivers and modern vehicles.</p>
+            </div>
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="ride.html">Ride</a></li>
+                    <li><a href="#our-rides">Our Rides</a></li>
+                    <li><a href="contact-us.html">Contact Us</a></li>
+                    <li><a href="#about">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact">
+                <h3>Contact Us</h3>
+                <p>support@taximeeya.com</p>
+                <p>+94 77 123 4567</p>
+                <p>Available 24/7 for your convenience</p>
+                <div class="socials">
+                    <a href="https://facebook.com" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://whatsapp.com" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Taxi MEEYA | Developed by Group 19 | All Rights Reserved
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
+    <script src="js/ride.js"></script>
+</body>
+</html>

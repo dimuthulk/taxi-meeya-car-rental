@@ -22,7 +22,7 @@
             <a href="#" id="logo"><img src="./images/Taxi_Meeya.png" alt=""></a>
             <nav class="navbar">
                 <a href="index.html">Home</a>
-                <a href="#">Ride</a>
+                <a href="ride.html">Ride</a>
                 <a href="#">Our Rides</a>
                 <a href="contact-us.php">Contact Us</a>
                 <a href="#">About Us</a>

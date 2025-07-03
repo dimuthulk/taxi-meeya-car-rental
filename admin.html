@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Taxi Meeya</title>
+    <link rel="stylesheet" href="css/style1.css">
+    <link rel="stylesheet" href="fontawesome-free-5.15.3-web/css/all.min.css">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .admin-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #667eea;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 1.4rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .bookings-table {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .table-header {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .bookings-list {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .booking-item {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr 1fr 1fr 100px;
+            gap: 1rem;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #f0f0f0;
+            align-items: center;
+        }
+        
+        .booking-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-confirmed { background: #d4edda; color: #155724; }
+        .status-completed { background: #d1ecf1; color: #0c5460; }
+        .status-cancelled { background: #f8d7da; color: #721c24; }
+        
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary { background: #667eea; color: white; }
+        .btn-success { background: #4CAF50; color: white; }
+        .btn-danger { background: #f44336; color: white; }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .booking-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .booking-item > div {
+                padding: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1><i class="fas fa-tachometer-alt"></i> Taxi Meeya Admin Dashboard</h1>
+            <p>Manage bookings and monitor system performance</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number" id="total-bookings">0</span>
+                <span class="stat-label">Total Bookings</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="pending-bookings">0</span>
+                <span class="stat-label">Pending Bookings</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="completed-bookings">0</span>
+                <span class="stat-label">Completed Today</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="total-revenue">Rs. 0</span>
+                <span class="stat-label">Today's Revenue</span>
+            </div>
+        </div>
+        
+        <div class="bookings-table">
+            <div class="table-header">
+                <h2><i class="fas fa-list"></i> Recent Bookings</h2>
+                <button onclick="refreshBookings()" class="action-btn btn-primary">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+            </div>
+            
+            <div class="bookings-list" id="bookings-list">
+                <!-- Bookings will be loaded here -->
+                <div style="text-align: center; padding: 3rem; color: #666;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <p>Loading bookings...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Admin dashboard functionality
+        let allBookings = [];
+        
+        // Load dashboard data
+        async function loadDashboard() {
+            try {
+                // In a real application, this would fetch from your API
+                // For demo purposes, we'll simulate some data
+                await loadMockData();
+                updateStats();
+                displayBookings();
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+                showError('Failed to load dashboard data');
+            }
+        }
+        
+        // Simulate loading data (replace with actual API calls)
+        async function loadMockData() {
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            allBookings = [
+                {
+                    id: 1,
+                    booking_reference: 'TAXI20250701001',
+                    passenger_name: 'John Doe',
+                    phone_number: '+94771234567',
+                    pickup_location: 'Colombo Fort',
+                    destination: 'Airport',
+                    vehicle_type: 'car',
+                    estimated_fare: 2500.00,
+                    booking_status: 'confirmed',
+                    created_at: new Date().toISOString()
+                },
+                {
+                    id: 2,
+                    booking_reference: 'TAXI20250701002',
+                    passenger_name: 'Jane Smith',
+                    phone_number: '+94779876543',
+                    pickup_location: 'Kandy City',
+                    destination: 'Temple of Tooth',
+                    vehicle_type: 'tuktuk',
+                    estimated_fare: 400.00,
+                    booking_status: 'pending',
+                    created_at: new Date(Date.now() - 30 * 60 * 1000).toISOString()
+                },
+                {
+                    id: 3,
+                    booking_reference: 'TAXI20250701003',
+                    passenger_name: 'Mike Johnson',
+                    phone_number: '+94775555555',
+                    pickup_location: 'Galle Face',
+                    destination: 'Mount Lavinia',
+                    vehicle_type: 'motorbike',
+                    estimated_fare: 350.00,
+                    booking_status: 'completed',
+                    created_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString()
+                }
+            ];
+        }
+        
+        // Update statistics
+        function updateStats() {
+            const totalBookings = allBookings.length;
+            const pendingBookings = allBookings.filter(b => b.booking_status === 'pending').length;
+            const todayCompleted = allBookings.filter(b => 
+                b.booking_status === 'completed' && 
+                new Date(b.created_at).toDateString() === new Date().toDateString()
+            ).length;
+            
+            const todayRevenue = allBookings
+                .filter(b => 
+                    b.booking_status === 'completed' && 
+                    new Date(b.created_at).toDateString() === new Date().toDateString()
+                )
+                .reduce((sum, b) => sum + parseFloat(b.estimated_fare), 0);
+            
+            document.getElementById('total-bookings').textContent = totalBookings;
+            document.getElementById('pending-bookings').textContent = pendingBookings;
+            document.getElementById('completed-bookings').textContent = todayCompleted;
+            document.getElementById('total-revenue').textContent = `Rs. ${todayRevenue.toLocaleString()}`;
+        }
+        
+        // Display bookings
+        function displayBookings() {
+            const bookingsList = document.getElementById('bookings-list');
+            
+            if (allBookings.length === 0) {
+                bookingsList.innerHTML = `
+                    <div style="text-align: center; padding: 3rem; color: #666;">
+                        <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                        <p>No bookings found</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            bookingsList.innerHTML = allBookings.map(booking => `
+                <div class="booking-item">
+                    <div>
+                        <strong>${booking.booking_reference}</strong><br>
+                        <small>${new Date(booking.created_at).toLocaleString()}</small>
+                    </div>
+                    <div>
+                        <strong>${booking.passenger_name}</strong><br>
+                        ${booking.phone_number}<br>
+                        <small>${booking.pickup_location} → ${booking.destination}</small>
+                    </div>
+                    <div>${booking.vehicle_type.toUpperCase()}</div>
+                    <div>Rs. ${parseFloat(booking.estimated_fare).toLocaleString()}</div>
+                    <div>
+                        <span class="status-badge status-${booking.booking_status}">
+                            ${booking.booking_status.toUpperCase()}
+                        </span>
+                    </div>
+                    <div>
+                        ${getActionButtons(booking)}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Get action buttons based on booking status
+        function getActionButtons(booking) {
+            switch (booking.booking_status) {
+                case 'pending':
+                    return `
+                        <button onclick="updateStatus(${booking.id}, 'confirmed')" class="action-btn btn-success" title="Confirm">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button onclick="updateStatus(${booking.id}, 'cancelled')" class="action-btn btn-danger" title="Cancel">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                case 'confirmed':
+                    return `
+                        <button onclick="updateStatus(${booking.id}, 'completed')" class="action-btn btn-success" title="Complete">
+                            <i class="fas fa-check-circle"></i>
+                        </button>
+                    `;
+                default:
+                    return `<span style="color: #999;">-</span>`;
+            }
+        }
+        
+        // Update booking status
+        async function updateStatus(bookingId, newStatus) {
+            try {
+                // Find and update the booking
+                const bookingIndex = allBookings.findIndex(b => b.id === bookingId);
+                if (bookingIndex !== -1) {
+                    allBookings[bookingIndex].booking_status = newStatus;
+                    
+                    // In real application, send update to server
+                    // await fetch(`php/booking.php`, { method: 'PUT', ... });
+                    
+                    updateStats();
+                    displayBookings();
+                    
+                    showSuccess(`Booking ${allBookings[bookingIndex].booking_reference} updated to ${newStatus}`);
+                }
+            } catch (error) {
+                console.error('Error updating booking:', error);
+                showError('Failed to update booking status');
+            }
+        }
+        
+        // Refresh bookings
+        async function refreshBookings() {
+            document.getElementById('bookings-list').innerHTML = `
+                <div style="text-align: center; padding: 3rem; color: #666;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <p>Refreshing...</p>
+                </div>
+            `;
+            
+            await loadDashboard();
+        }
+        
+        // Show success message
+        function showSuccess(message) {
+            showNotification(message, 'success');
+        }
+        
+        // Show error message
+        function showError(message) {
+            showNotification(message, 'error');
+        }
+        
+        // Simple notification system
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 600;
+                z-index: 10000;
+                min-width: 300px;
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+                background: ${type === 'success' ? '#4CAF50' : '#f44336'};
+            `;
+            
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <span>${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" 
+                            style="background: none; border: none; color: white; font-size: 18px; cursor: pointer; margin-left: 15px;">×</button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+        
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', loadDashboard);
+        
+        // Auto-refresh every 30 seconds
+        setInterval(refreshBookings, 30000);
+    </script>
+</body>
+</html>
