@@ -1,10 +1,15 @@
 /* General styles */
 body {
   font-family: "Inter", sans-serif;
-  background: #121212;
+  background: url('../images/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: #f5f5f5;
   margin: 0;
   padding: 0;
+  min-height: 100vh;
 }
 
 /* Header */
@@ -46,7 +51,6 @@ body {
 /* Contact/Feedback Section */
 .contact-section {
   padding: 60px 20px;
-  background: linear-gradient(135deg, #000000, #1f1f1f);
   min-height: 100vh;
 }
 
@@ -71,10 +75,10 @@ h2 {
   width: 100%;
   padding: 14px;
   margin-bottom: 15px;
-  border: none;
+  border: 2px solid #111213;
   border-radius: 6px;
-  background: #2c2c2c;
-  color: #fff;
+  background: #ffffff;
+  color: #333333;
   font-size: 1em;
   outline: none;
   transition: background 0.3s ease, border 0.3s ease;
@@ -89,28 +93,33 @@ h2 {
 /* Focus states */
 .contact-form input:focus,
 .contact-form textarea:focus {
-  background: #3b3b3b;
-  border: 1px solid #f9c500;
+  background: #ffffff;
+  border: 2px solid #ffeb3b;
+  box-shadow: 0 0 0 3px rgba(255, 235, 59, 0.1);
 }
 
 /* Submit button */
 .contact-form button {
-  background-color: #f9c500;
+  background: linear-gradient(135deg, #ffeb3b, #ffc61a);
   color: #000;
   border: none;
   padding: 14px 30px;
-  font-size: 1em;
+  font-size: 1.2rem;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
   transition: background 0.3s ease, transform 0.2s ease;
   font-family: "Inter", sans-serif;
-  margin-top: 10px;
+  margin: 20px auto 10px auto;
+  display: block;
+  width: auto;
+  min-width: 200px;
 }
 
 .contact-form button:hover {
-  background-color: #ffdb3b;
+  background: linear-gradient(135deg, #ffc61a, #ffeb3b);
   transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 235, 59, 0.3);
 }
 
 /* Rating stars */
@@ -137,16 +146,16 @@ h2 {
 .rating label:hover,
 .rating label:hover ~ label,
 .rating input[type="radio"]:checked ~ label {
-  color: #f9c500; /* gold highlight */
+  color: #ffeb3b; /* yellow highlight */
 }
 
 .rating input[type="radio"]:checked + label,
 .rating input[type="radio"]:checked + label ~ label {
-  color: #f9c500;
+  color: #ffeb3b;
 }
 
 .rating input[type="radio"]:focus + label {
-  outline: 2px solid #f9c500;
+  outline: 2px solid #ffeb3b;
   outline-offset: 2px;
 }
 
@@ -179,9 +188,27 @@ iframe {
 
 /* Placeholder styling */
 ::placeholder {
-  color: #aaa;
-  opacity: 0.8;
+  color: #666666;
+  opacity: 1;
   font-family: "Inter", sans-serif;
+}
+
+/* Webkit browsers (Chrome, Safari, etc.) */
+::-webkit-input-placeholder {
+  color: #666666;
+  opacity: 1;
+}
+
+/* Firefox */
+::-moz-placeholder {
+  color: #666666;
+  opacity: 1;
+}
+
+/* Internet Explorer 10+ */
+:-ms-input-placeholder {
+  color: #666666;
+  opacity: 1;
 }
 
 /* Highlight invalid fields */

@@ -1,7 +1,15 @@
 <?php
+<<<<<<< HEAD
 /**
  * Database configuration for Taxi Meeya booking system
  */
+=======
+    $host = 'localhost';
+    $port = 3306;
+    $dbname = 'taxi_meeya';
+    $username = "root";
+    $password = "";
+>>>>>>> a90107acfeeccf696f0b4504befbd26708024b69
 
 // Database configuration
 $host = 'localhost';
