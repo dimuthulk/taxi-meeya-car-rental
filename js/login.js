@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (submitBtn) {
             submitBtn.classList.remove('loading');
             submitBtn.disabled = false;
-            submitBtn.textContent = 'Login';
+            submitBtn.textContent = 'Sign In';
         }
     }
 });
