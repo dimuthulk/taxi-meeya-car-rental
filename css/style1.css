@@ -7,9 +7,29 @@
     text-decoration: none;
 }
 
+/* CSS Variables for Unified Blue Theme */
+:root {
+    --primary-blue: #2563eb;
+    --light-blue: #3b82f6;
+    --dark-blue: #1d4ed8;
+    --very-dark-blue: #1e3a8a;
+    --ultra-light-blue: #dbeafe;
+    --blue-gray: #64748b;
+    --white: #ffffff;
+    --light-gray: #f8fafc;
+    --medium-gray: #e2e8f0;
+    --dark-gray: #334155;
+    --primary-gradient: linear-gradient(135deg, #2563eb, #3b82f6);
+    --light-gradient: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    --dark-gradient: linear-gradient(135deg, #1d4ed8, #2563eb);
+    --blue-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+    --blue-shadow-hover: 0 8px 25px rgba(37, 99, 235, 0.25);
+    --transition-smooth: all 0.3s ease;
+}
+
 body {
         font-family: "Inter", sans-serif;
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../images/background.png);
+        background: linear-gradient(rgba(37, 99, 235, 0.1), rgba(29, 78, 216, 0.1)), url(../images/background.png);
         background-position: center;
         background-size: cover;
         background-attachment: fixed;
@@ -17,7 +37,7 @@ body {
 }
 
 .user-welcome{
-    color: #ffc61a;
+    color: var(--primary-blue);
     font-weight: bold;
     font-size: 15px;
     text-align: center;
@@ -59,36 +79,38 @@ html{
 }
 
 .header .navbar a:hover{
-    background: #ffc61a;
-    color: #000;
-    border-color: #ffeb3b;
+    background: var(--primary-blue);
+    color: var(--white);
+    border-color: var(--light-blue);
     transform: translateY(-2px);
+    box-shadow: var(--blue-shadow);
 }
 #menu-bars{
-    color: #000;
+    color: var(--white);
     font-size: 2rem;
     display: none;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition-smooth);
     padding: 1rem;
     border-radius: 8px;
-    background: #ffc61a;
+    background: var(--primary-blue);
     border: 2px solid transparent;
 }
 
 #menu-bars:hover {
-    background: #ffeb3b;
-    border-color: #000;
+    background: var(--light-blue);
+    border-color: var(--white);
     transform: scale(1.05);
+    box-shadow: var(--blue-shadow-hover);
 }
 
 #menu-bars.fa-times {
-    background: #ff4444;
-    color: white;
+    background: var(--dark-blue);
+    color: var(--white);
 }
 
 #menu-bars.fa-times:hover {
-    background: #cc0000;
+    background: var(--very-dark-blue);
 }
 .navbar.active{
     top: 10%;
@@ -104,7 +126,7 @@ html{
 
 }
 .background-text h2 span{
-    color: #ffc61a;
+    color: var(--primary-blue);
 }
 .taxi-image{
     width: 35%;
@@ -127,16 +149,16 @@ html{
 
 .register-btn {
     display: inline-block;
-    background: linear-gradient(135deg, #ffc61a, #ffeb3b);
-    color: #000;
+    background: var(--primary-gradient);
+    color: var(--white);
     padding: 1.5rem 4rem;
     font-size: 1.8rem;
     font-weight: 700;
     text-decoration: none;
     border-radius: 50px;
     border: 3px solid transparent;
-    transition: all 0.3s ease;
-    box-shadow: 0 6px 20px rgba(255, 198, 26, 0.4);
+    transition: var(--transition-smooth);
+    box-shadow: var(--blue-shadow);
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
@@ -150,7 +172,7 @@ html{
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 242, 0, 0.4), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     transition: left 0.6s ease;
 }
 
@@ -159,11 +181,11 @@ html{
 }
 
 .register-btn:hover {
-    background: linear-gradient(135deg, #ffeb3b, #ffc61a);
-    border-color: #fff;
+    background: var(--dark-gradient);
+    border-color: var(--white);
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 10px 30px rgba(255, 198, 26, 0.6);
-    color: #000;
+    box-shadow: var(--blue-shadow-hover);
+    color: var(--white);
 }
 
 .register-btn:active {
@@ -190,7 +212,8 @@ html{
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(252, 210, 0, 0.8);
+    background: var(--light-gradient);
+    opacity: 0.9;
     z-index: 1;
 }
 
@@ -282,7 +305,7 @@ html{
 }
 
 .form-fields input:focus {
-    border-color: #fcd200;
+    border-color: var(--primary-blue);
     box-shadow: 0 0 5px rgba(255, 196, 0, 0.8);
 }
 
@@ -303,7 +326,7 @@ html{
 }
 
 .submit button:hover {
-    background: #fcd200;
+    background: var(--primary-blue);
     color: black;
     transform: scale(1.05);
 }
@@ -325,7 +348,7 @@ html{
     padding-bottom: 6rem;
 }
 .main-tariff h1 span{
-    color: #ffc61a;
+    color: var(--primary-blue);
 }
 .inner-tarrif{
     display: flex;
@@ -350,7 +373,7 @@ html{
     padding: 2rem;
 }
 .tarrif-container .inner-box h3{
-    color: #ffc61a;
+    color: var(--primary-blue);
     font-size: 2rem;
 }
 .tarrif-container .inner-box a{
@@ -359,7 +382,7 @@ html{
 
 }
 .tarrif-container:nth-child(2){
-    background: #ffc61a;
+    background: var(--primary-blue);
 }
 .heading-yellow{
     color: black;
@@ -401,7 +424,7 @@ html{
 }
 
 .fast-booking .fast-hading{
-    color: #ffc61a;
+    color: var(--primary-blue);
     font-size: 3.8rem;
     text-align: center;
     padding-top: 2rem;
@@ -444,7 +467,7 @@ html{
 .booking-content:hover {
     transform: translateY(-10px);
     background: rgba(255, 198, 26, 0.1);
-    border-color: #ffc61a;
+    border-color: var(--primary-blue);
     box-shadow: 0 15px 30px rgba(255, 198, 26, 0.3);
 }
 
@@ -455,7 +478,7 @@ html{
 
 .inner-fast-text h1{
     font-size: 2.2rem;
-    color: #ffc61a;
+    color: var(--primary-blue);
     padding: 2rem 1rem 1rem;
     margin-bottom: 1rem;
     font-weight: 700;
@@ -469,7 +492,7 @@ html{
 }
 
 .icon-fast{
-    background: linear-gradient(135deg, #ffc61a, #ffeb3b);
+    background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
     width: 70px;
     height: 70px;
     border-radius: 50%;
@@ -499,7 +522,7 @@ html{
     width: 100%;
 }
 .testimonials .heading-test{
-    color: #ffc61a;
+    color: var(--primary-blue);
     font-size: 38px;
     padding: 2rem;
     text-align: center;
@@ -527,7 +550,7 @@ html{
 
 }
 .clients h1{
-    color: #ffc61a;
+    color: var(--primary-blue);
     margin-left: 1rem;
 }
 
@@ -547,7 +570,7 @@ html{
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #ffc61a 0%, #ffeb3b 50%, #ffc61a 100%);
+  background: linear-gradient(90deg, var(--primary-blue) 0%, var(--light-blue) 50%, var(--primary-blue) 100%);
   box-shadow: 0 2px 10px rgba(255, 198, 26, 0.5);
 }
 
@@ -589,12 +612,12 @@ html{
 
 .footer-section:hover {
   transform: translateY(-5px);
-  border-color: #ffc61a;
+  border-color: var(--primary-blue);
   box-shadow: 0 10px 30px rgba(255, 198, 26, 0.2);
 }
 
 .footer-section h2, .footer-section h3 {
-  color: #ffc61a;
+  color: var(--primary-blue);
   margin-bottom: 20px;
   font-size: 1.8rem;
   font-weight: 700;
@@ -610,7 +633,7 @@ html{
   left: 0;
   width: 50px;
   height: 2px;
-  background: linear-gradient(90deg, #ffc61a, #ffeb3b);
+  background: linear-gradient(90deg, var(--primary-blue), var(--light-blue));
   border-radius: 2px;
 }
 
@@ -641,7 +664,7 @@ html{
   content: '▶';
   position: absolute;
   left: 0;
-  color: #ffc61a;
+  color: var(--primary-blue);
   font-size: 1rem;
   transition: transform 0.3s ease;
 }
@@ -659,7 +682,7 @@ html{
 }
 
 .footer-section ul li a:hover {
-  color: #ffc61a;
+  color: var(--primary-blue);
   padding-left: 10px;
 }
 
@@ -692,7 +715,7 @@ html{
   justify-content: center;
   width: 45px;
   height: 45px;
-  background: linear-gradient(135deg, #ffc61a, #ffeb3b);
+  background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
   border-radius: 50%;
   color: #000;
   text-decoration: none;
@@ -704,7 +727,7 @@ html{
 .footer .socials a:hover {
   transform: translateY(-3px) scale(1.1);
   box-shadow: 0 8px 25px rgba(255, 198, 26, 0.5);
-  background: linear-gradient(135deg, #ffeb3b, #ffc61a);
+  background: linear-gradient(135deg, var(--light-blue), var(--primary-blue));
 }
 
 .footer .socials a i {
@@ -737,7 +760,7 @@ html{
   transform: translateX(-50%);
   width: 100px;
   height: 2px;
-  background: linear-gradient(90deg, #ffc61a, #ffeb3b);
+  background: linear-gradient(90deg, var(--primary-blue), var(--light-blue));
   border-radius: 2px;
 }
 
@@ -801,7 +824,7 @@ html{
   padding: 10px 15px;
   border-radius: 8px;
   margin: 10px 0;
-  border-left: 3px solid #ffc61a;
+  border-left: 3px solid var(--primary-blue);
 }
 
 /* Pulse effect for social icons */
@@ -842,7 +865,7 @@ html{
     display: none; /* Hidden by default on desktop */
     text-align: center;
     padding: 20px;
-    background: linear-gradient(135deg, #ffc61a, #ffeb3b);
+    background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
     position: sticky;
     bottom: 0;
     z-index: 1000;
@@ -865,7 +888,7 @@ html{
 }
 
 .mobile-book-btn:hover {
-    background: #ffc61a;
+    background: var(--primary-blue);
     color: #000;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
@@ -926,7 +949,7 @@ html{
         text-align: center;
         padding: 1.5rem 2rem;
         margin: 1rem 2rem;
-        background: #ffc61a;
+        background: var(--primary-blue);
         border-radius: 8px;
         color: #000;
         text-decoration: none;
@@ -935,8 +958,8 @@ html{
     }
     
     .navbar a:hover {
-        background: #ffeb3b;
-        border-color: #ffc61a;
+        background: var(--light-blue);
+        border-color: var(--primary-blue);
         transform: translateY(-2px);
     }
     
@@ -1230,7 +1253,7 @@ html{
 }
 
 .user-profile:hover .avatar-img {
-    border-color: #ffc61a;
+    border-color: var(--primary-blue);
     transform: scale(1.05);
 }
 
@@ -1337,8 +1360,8 @@ html{
 
 .ride-header .navbar a.active {
     background: rgba(255, 198, 26, 0.2);
-    color: #ffc61a;
-    border-color: #ffc61a;
+    color: var(--primary-blue);
+    border-color: var(--primary-blue);
 }
 
 /* Hero Section */
@@ -1379,7 +1402,7 @@ html{
     display: block;
     font-size: 3rem;
     font-weight: 700;
-    color: #ffc61a;
+    color: var(--primary-blue);
     text-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
@@ -1573,7 +1596,7 @@ html{
 .book-now-btn {
     width: 100%;
     padding: 2rem;
-    background: linear-gradient(135deg, #ffc61a, #ffeb3b);
+    background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
     color: #333;
     border: none;
     border-radius: 15px;
@@ -1675,7 +1698,7 @@ html{
 }
 
 .vehicle-badge.premium {
-    background: linear-gradient(135deg, #ffc61a, #ffeb3b);
+    background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
     color: #333;
 }
 
@@ -1831,7 +1854,7 @@ html{
 }
 
 .about-us h1 span {
-    color: #ffeb3b;
+    color: var(--light-blue);
 }
 
 .about-content {
@@ -1874,7 +1897,7 @@ html{
 
 .stat-item h3 {
     font-size: 2.5rem;
-    color: #ffeb3b;
+    color: var(--light-blue);
     margin-bottom: 0.5rem;
     font-weight: 700;
 }
@@ -1932,7 +1955,7 @@ html{
     margin: 0 auto 2rem;
     border-radius: 50%;
     overflow: hidden;
-    border: 4px solid #ffeb3b;
+    border: 4px solid var(--light-blue);
 }
 
 .member-image img {
@@ -1949,7 +1972,7 @@ html{
 }
 
 .team-member p:first-of-type {
-    color: #ffeb3b;
+    color: var(--light-blue);
     font-weight: 600;
     margin-bottom: 1rem;
 }

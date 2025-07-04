@@ -1,3 +1,13 @@
+/* CSS Variables for Blue Theme */
+:root {
+    --primary-blue: #2563eb;
+    --light-blue: #3b82f6;
+    --dark-blue: #1d4ed8;
+    --very-dark-blue: #1e3a8a;
+    --ultra-light-blue: #dbeafe;
+    --white: #ffffff;
+    --primary-gradient: linear-gradient(135deg, #2563eb, #3b82f6);
+}
 /* Common CSS Reset and Utility Classes */
 *,
 *::before,
@@ -94,7 +104,7 @@ ol {
 }
 
 .register-header {
-    background: linear-gradient(135deg, #ffeb3b 0%, #ffc61a 100%);
+    background: linear-gradient(135deg, var(--light-blue) 0%, var(--primary-blue) 100%);
     color: hsl(0, 0%, 0%);
     text-align: center;
     padding: 2rem;
@@ -147,7 +157,7 @@ ol {
 
 .form-group input:focus {
     outline: none;
-    border-color: #ffeb3b;
+    border-color: var(--light-blue);
     background: white;
     box-shadow: 0 0 0 3px rgba(255, 235, 59, 0.1);
     transform: translateY(-1px);
@@ -173,7 +183,7 @@ ol {
 .register-btn {
     width: 100%;
     padding: 15px;
-    background: linear-gradient(135deg, #ffeb3b 0%, #ffc61a 100%);
+    background: linear-gradient(135deg, var(--light-blue) 0%, var(--primary-blue) 100%);
     color: #000;
     border: none;
     border-radius: 10px;
@@ -246,7 +256,7 @@ ol {
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: #ffeb3b;
+    color: var(--light-blue);
     font-size: 1.2rem;
 }
 
@@ -331,3 +341,4 @@ ol {
         transform: rotate(360deg);
     }
 }
+

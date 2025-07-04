@@ -1,0 +1,51 @@
+/* ===================================
+   TAXI MEEYA - UNIFIED BLUE COLOR THEME
+   ===================================
+   
+   Primary Color Palette:
+   - Primary Blue: #2563eb (Main brand color)
+   - Light Blue: #3b82f6 (Hover states, accents)
+   - Dark Blue: #1d4ed8 (Headers, emphasis)
+   - Very Dark Blue: #1e3a8a (Text, borders)
+   - Ultra Light Blue: #dbeafe (Backgrounds, cards)
+   - Blue Gray: #64748b (Secondary text)
+   - White: #ffffff (Cards, contrast)
+   - Light Gray: #f8fafc (Subtle backgrounds)
+   
+   Usage Guidelines:
+   - Use Primary Blue for main actions and branding
+   - Use Light Blue for hover states and interactive elements
+   - Use Dark Blue for headers and important text
+   - Use Ultra Light Blue for card backgrounds
+   - Maintain good contrast ratios for accessibility
+================================== */
+
+:root {
+    /* Primary Blue Color Palette */
+    --primary-blue: #2563eb;
+    --light-blue: #3b82f6;
+    --dark-blue: #1d4ed8;
+    --very-dark-blue: #1e3a8a;
+    --ultra-light-blue: #dbeafe;
+    --blue-gray: #64748b;
+    
+    /* Neutral Colors */
+    --white: #ffffff;
+    --light-gray: #f8fafc;
+    --medium-gray: #e2e8f0;
+    --dark-gray: #334155;
+    
+    /* Gradients */
+    --primary-gradient: linear-gradient(135deg, #2563eb, #3b82f6);
+    --light-gradient: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    --dark-gradient: linear-gradient(135deg, #1d4ed8, #2563eb);
+    
+    /* Shadows */
+    --blue-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+    --blue-shadow-hover: 0 8px 25px rgba(37, 99, 235, 0.25);
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+    /* Transitions */
+    --transition-fast: all 0.2s ease;
+    --transition-smooth: all 0.3s ease;
+}
