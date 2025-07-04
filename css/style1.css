@@ -1816,75 +1816,192 @@ html{
     line-height: 1.6;
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .hero-content h1 {
-        font-size: 2.5rem;
-    }
-    
-    .hero-content p {
-        font-size: 1.5rem;
-    }
-    
-    .hero-stats {
-        gap: 2rem;
-    }
-    
-    .stat-number {
-        font-size: 2rem;
-    }
-    
-    .booking-content {
-        grid-template-columns: 1fr;
-        gap: 4rem;
-    }
-    
-    .booking-form-container {
-        position: static;
-        padding: 2.5rem;
-    }
-    
-    .form-row {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    
-    .vehicles-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .benefits-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .booking-info h2,
-    .vehicle-types h2,
-    .why-choose-us h2 {
-        font-size: 2.5rem;
-    }
+/* About Us Section */
+.about-us {
+    padding: 8rem 2rem;
+    background: #f8f9fa;
 }
 
-@media (max-width: 480px) {
-    .ride-hero {
-        padding: 6rem 1rem 4rem;
-    }
-    
-    .hero-stats {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    
-    .booking-section,
-    .vehicle-types,
-    .why-choose-us {
+.about-us h1 {
+    font-size: 3.5rem;
+    text-align: center;
+    color: #333;
+    margin-bottom: 5rem;
+    font-weight: 700;
+}
+
+.about-us h1 span {
+    color: #ffeb3b;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-text h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.about-text p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.stat-item h3 {
+    font-size: 2.5rem;
+    color: #ffeb3b;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.stat-item p {
+    color: #333;
+    font-weight: 600;
+    margin: 0;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Our Team Section */
+.our-team {
+    padding: 8rem 2rem;
+    background: white;
+}
+
+.our-team h2 {
+    font-size: 3rem;
+    text-align: center;
+    color: #333;
+    margin-bottom: 4rem;
+    font-weight: 700;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.team-member {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: #f8f9fa;
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-5px);
+}
+
+.member-image {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 2rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #ffeb3b;
+}
+
+.member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-member h3 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.team-member p:first-of-type {
+    color: #ffeb3b;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.team-member p:last-of-type {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    /* About Us Mobile Styles */
+    .about-us {
         padding: 4rem 1rem;
     }
     
-    .booking-form-container {
-        padding: 2rem;
+    .about-us h1 {
+        font-size: 2.5rem;
     }
     
-    .vehicle-info {
-        padding: 2rem;
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .about-text {
+        order: 2;
+    }
+    
+    .about-image {
+        order: 1;
+    }
+    
+    .about-text h2 {
+        font-size: 2rem;
+    }
+    
+    .stats {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .our-team {
+        padding: 4rem 1rem;
+    }
+    
+    .our-team h2 {
+        font-size: 2.5rem;
+    }
+    
+    .team-grid {
+        grid-template-columns: 1fr;
     }
 }
